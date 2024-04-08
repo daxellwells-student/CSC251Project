@@ -1,11 +1,21 @@
+import java.io.*;
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Project_daxell_wells
 {
-   public static void main(String[] args)
+   public static void main(String[] args) throws IOException
    {
+      
       // declared variables
-      Scanner keyboard = new Scanner(System.in);
+      File file = new File("PolicyInformation.txt");
+      if(!file.exists())
+      {
+         System.out.println("Unable to locate file.");
+         System.exit(0);
+      }
+      Scanner policyFile = new Scanner(file);
+      ArrayList<Policy> policyList = new ArrayList<Policy>();
       int policyNumber;
       String policyName;
       String policyHolderFirstName;
@@ -14,48 +24,25 @@ public class Project_daxell_wells
       String smokerStatus;
       double policyHolderHeight;
       double policyHolderWeight;
+      Policy policy;
       
-      // ask user for policy information
-      System.out.print("Please enter the Policy Number: ");
-      policyNumber = keyboard.nextInt();
-      keyboard.nextLine();
-      
-      System.out.print("Please enter the Provider Name: ");
-      policyName = keyboard.nextLine();
-      
-      System.out.print("Please enter the Policyholder's First Name: ");
-      policyHolderFirstName = keyboard.nextLine();
-      
-      System.out.print("Please enter the Policyholder's Last Name: ");
-      policyHolderLastName = keyboard.nextLine();
-      
-      System.out.print("Please enter the Policyholder's Age: ");
-      policyHolderAge = keyboard.nextInt();
-      keyboard.nextLine();
-      
-      while(true)
+      while (policyFile.hasNext())
       {
-         System.out.print("Please enter the Policyholder's Smoking Stauts (smoker/non-smoker): ");
-         smokerStatus = keyboard.nextLine().toLowerCase();
-         if (smokerStatus.equals("smoker") || smokerStatus.equals("non-smoker"))
-         {break;}
-         System.out.println("Error!  Invalid selection.  Please try again.");
-      }
-      
-      System.out.print("Please enter the Policyholder's Height (in inches): ");
-      policyHolderHeight = keyboard.nextDouble();
-      keyboard.nextLine();
-      
-      System.out.print("Please enter the Policyholder's Weight (in pounds): ");
-      policyHolderWeight = keyboard.nextDouble();
-      keyboard.nextLine();
-      
-      // create policy object based on user input
-      Policy policy = new Policy(policyNumber, policyName, policyHolderFirstName, policyHolderLastName, policyHolderAge, smokerStatus, policyHolderHeight, policyHolderWeight);
-      
-      // displays policy information, calulated BMI, and total price for the policy
-      displayPolicyInformation(policy);
-      
+         
+         policyNumber = policyFile.nextInt();
+         policyFile.nextLine();
+         policyName = policyFile.nextLine();
+         policyHolderFirstName = policyFile.nextLine();
+         policyHolderLastName = policyFile.nextLine();
+         policyHolderAge = policyFile.nextInt();
+         policyFile.nextLine();
+         smokerStatus = policyFile.nextLine();
+         policyHolderHeight = policyFile.nextDouble();
+         policyFile.nextLine();
+         policyHolderWeight = policyFile.nextDouble();
+         policy = new Policy(policyNumber, policyName, policyHolderFirstName, policyHolderLastName, policyHolderAge, smokerStatus, policyHolderHeight, policyHolderWeight);
+         policyList.add(policy);
+      }  
    }
    
    /**
