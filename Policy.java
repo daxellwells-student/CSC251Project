@@ -11,7 +11,9 @@ class Policy
    private double policyHolderHeight;
    private double policyHolderWeight;
    
-   // default no-args contructor
+   /**
+      Default no-arg constructor that creates a policy object with no arguments.  Sets values to default values.
+   */
    public Policy()
    {
       policyNumber = 0;
@@ -24,7 +26,17 @@ class Policy
       policyHolderWeight = 180;
    }
    
-   // constructor for creating a new policy with policy holder information
+   /**
+      args constructor that creates a policy object with arguments.  Sets values to the arguments provided.
+      @param number sets the policyNumber value.
+      @param name to be used to set the policyName value.
+      @param firstName to be used to set the policyHolderFirstName value.
+      @param lastName to be used to set the policyHolderLastName value.
+      @param age to be used to set the policyHolderAge value.
+      @param smokingStatus to be used to set the smokerStatus value.
+      @param height to be used to set the policyHolderHeight value.
+      @param weight to be used to set the policyHolderWeight value.
+   */
    public Policy(int number, String name, String firstName, String lastName, int age, String smokingStatus, double height, double weight)
    {
       policyNumber = number;
