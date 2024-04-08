@@ -7,13 +7,14 @@ public class Project_daxell_wells
    public static void main(String[] args) throws IOException
    {
       
-      // declared variables
       File file = new File("PolicyInformation.txt");
       if(!file.exists())
       {
          System.out.println("Unable to locate file.");
          System.exit(0);
       }
+      
+      // declared variables
       Scanner policyFile = new Scanner(file);
       ArrayList<Policy> policyList = new ArrayList<Policy>();
       int policyNumber;
@@ -24,6 +25,7 @@ public class Project_daxell_wells
       String smokerStatus;
       double policyHolderHeight;
       double policyHolderWeight;
+      int numOfSmokers = 0, numOfNonSmokers = 0;
       Policy policy;
       
       while (policyFile.hasNext())
@@ -37,12 +39,28 @@ public class Project_daxell_wells
          policyHolderAge = policyFile.nextInt();
          policyFile.nextLine();
          smokerStatus = policyFile.nextLine();
+         if (smokerStatus.equals("smoker"))
+         {
+            numOfSmokers++;
+         }
+         else
+         {
+            numOfNonSmokers++;
+         }
          policyHolderHeight = policyFile.nextDouble();
          policyFile.nextLine();
          policyHolderWeight = policyFile.nextDouble();
          policy = new Policy(policyNumber, policyName, policyHolderFirstName, policyHolderLastName, policyHolderAge, smokerStatus, policyHolderHeight, policyHolderWeight);
          policyList.add(policy);
-      }  
+      }
+      
+      for (Policy pol : policyList)
+      {
+         displayPolicyInformation(pol);
+      }
+      System.out.println();
+      System.out.printf("The number of policies with a smoker is: %d\n", numOfSmokers);
+      System.out.printf("The number of policies with a non-smoker is: %d\n", numOfNonSmokers);
    }
    
    /**
