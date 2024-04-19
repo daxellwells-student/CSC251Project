@@ -1,6 +1,9 @@
 import java.lang.Math;
 class Policy
 {
+   // number of policies created
+   private static int numberOfPolicies = 0;
+   
    // policy information stores in the policy object
    private PolicyHolder policyMember;
    private int policyNumber;
