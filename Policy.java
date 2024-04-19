@@ -2,51 +2,41 @@ import java.lang.Math;
 class Policy
 {
    // policy information stores in the policy object
+   private PolicyHolder policyMember;
    private int policyNumber;
    private String policyName;
-   private String policyHolderFirstName;
-   private String policyHolderLastName;
-   private int policyHolderAge;
-   private String smokerStatus;
-   private double policyHolderHeight;
-   private double policyHolderWeight;
    
    /**
       Default no-arg constructor that creates a policy object with no arguments.  Sets values to default values.
    */
    public Policy()
    {
+      policyMember = new PolicyHolder();
       policyNumber = 0;
       policyName = "default";
-      policyHolderFirstName = "John";
-      policyHolderLastName = "Doe";
-      policyHolderAge = 30;
-      smokerStatus = "non-smoker";
-      policyHolderHeight = 70;
-      policyHolderWeight = 180;
+   }
+   
+   /**
+      constructor that takes a policy holder object.  Sets policy name and number to default values.
+   */
+   public Policy(PolicyHolder member)
+   {
+      policyMember = new PolicyHolder(member);
+      policyNumber = 0;
+      policyName = "default";
    }
    
    /**
       args constructor that creates a policy object with arguments.  Sets values to the arguments provided.
       @param number sets the policyNumber value.
       @param name to be used to set the policyName value.
-      @param firstName to be used to set the policyHolderFirstName value.
-      @param lastName to be used to set the policyHolderLastName value.
-      @param age to be used to set the policyHolderAge value.
-      @param smokingStatus to be used to set the smokerStatus value.
-      @param height to be used to set the policyHolderHeight value.
-      @param weight to be used to set the policyHolderWeight value.
+      @param member Policy Holder Object that contains the policy member's information
    */
-   public Policy(int number, String name, String firstName, String lastName, int age, String smokingStatus, double height, double weight)
+   public Policy(int number, String name, PolicyHolder member)
    {
       policyNumber = number;
       policyName = name;
-      policyHolderFirstName = firstName;
-      policyHolderLastName = lastName;
-      policyHolderAge = age;
-      smokerStatus = smokingStatus;
-      policyHolderHeight = height;
-      policyHolderWeight = weight;
+      policyMember = new PolicyHolder(member);
    }
    
    // setters and getters for each policy holder information field
@@ -84,107 +74,11 @@ class Policy
    {return policyName;}
    
    /**
-      Method that sets the policy holder's first name
-      @param firstName is the first name of the policy holder to set for the policy
-   */
-   public void setPolicyHolderFirstName(String firstName)
-   {
-      policyHolderFirstName = firstName;
-   }
-   
-   /**
-      Method that returns the policy holder's first name
-      @return the policy holder's first name
-   */
-   public String getPolicyHolderFirstName()
-   {return policyHolderFirstName;}
-   
-   /**
-      Method that sets the policy holder's last name
-      @param lastName is the last name of the policy holder to set for the policy
-   */
-   public void setPolicyHolderLastName(String lastName)
-   {
-      policyHolderLastName = lastName;
-   }
-   
-   /**
-      Method that returns the policy holder's last name
-      @return the policy holder's last name
-   */
-   public String getPolicyHolderLastName()
-   {return policyHolderLastName;}
-   
-   /**
-      Method that sets the policy holder's age
-      @param age is the policy holder's age to be set for the policy
-   */
-   public void setPolicyHolderAge(int age)
-   {
-      policyHolderAge = age;
-   }
-   
-   /**
-      Method that returns the policy holder's age
-      @return the policy holder's age
-   */
-   public int getPolicyHolderAge()
-   {return policyHolderAge;}
-   
-   /**
-      Method that sets the policy holder's smoking status
-      @param smokingStatus is smoking status of the policy holder to be set for the policy
-   */
-   public void setSmokerStatus(String smokingStatus)
-   {
-      smokerStatus = smokingStatus;
-   }
-   
-   /**
-      Method that returns the policy holder's smoking status
-      @return the policy holder's smoking status
-   */
-   public String getSmokerStatus()
-   {return smokerStatus;}
-   
-   /**
-      Method that sets the policy holder's height
-      @param height is the policy holder's height in inches to be set for the policy
-   */
-   public void setPolicyHolderHeight(double height)
-   {
-      policyHolderHeight = height;
-   }
-   
-   /**
-      Method that returns the policy holder's height
-      @return the policy holder's height in inches
-   */
-   public double getPolicyHolderHeight()
-   {return policyHolderHeight;}
-   
-   /**
-      Method that sets the policy holder's weight
-      @param weight is the policy holder's weight in pounds to be set for the policy
-   */
-   public void setPolicyHolderWeight(double weight)
-   {
-      policyHolderWeight = weight;
-   }
-   
-   /**
-      Method that returns the policy holder's weight
-      @return the policy holder's weight in pounds
-   */
-   public double getPolicyHolderWeight()
-   {return policyHolderWeight;}
-   
-   /**
       Method that calculates BMI based on policy holder height and weight
       @return the calculated BMI
    */
    public double calculateBMI()
-   {return (policyHolderWeight * 703) / (Math.pow(policyHolderHeight, 2.0));}
+   {return (policyMember.getPolicyHolderWeight() * 703) / (Math.pow(policyMember.getPolicyHolderHeight(), 2.0));}
    
    /**
       Method that calculated policy price based on policy holder information
@@ -200,11 +94,11 @@ class Policy
        double BMIThreshold = 35;
       
       double total = baseFee;
-      if (policyHolderAge > geriatricThreshold)
+      if (policyMember.getPolicyHolderAge() > geriatricThreshold)
       {
          total += geriatricFee;
       }
-      if (smokerStatus.equals("smoker"))
+      if (policyMember.getSmokerStatus().equals("smoker"))
       {
          total += smokerFee;
       }
