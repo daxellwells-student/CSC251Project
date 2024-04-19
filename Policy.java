@@ -111,4 +111,12 @@ class Policy
       
       return total;
    }
+   
+   public String toString()
+   {
+      String return_string = String.format("Policy Number: " + policyNumber + 
+             "\nProvider Name: %s\n", policyName);
+      return_string += policyMember.toString();
+      return return_string;
+   }
 }
