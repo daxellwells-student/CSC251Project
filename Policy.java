@@ -17,6 +17,7 @@ class Policy
       policyMember = new PolicyHolder();
       policyNumber = 0;
       policyName = "default";
+      numberOfPolicies++;
    }
    
    /**
@@ -27,6 +28,7 @@ class Policy
       policyMember = new PolicyHolder(member);
       policyNumber = 0;
       policyName = "default";
+      numberOfPolicies++;
    }
    
    /**
@@ -40,9 +42,17 @@ class Policy
       policyNumber = number;
       policyName = name;
       policyMember = new PolicyHolder(member);
+      numberOfPolicies++;
    }
    
    // setters and getters for each policy holder information field
+   
+   /**
+      Method that gets the numbers of policies
+      @return the number of policies created
+   */
+   public static int getNumberOfPolicies()
+   {return numberOfPolicies;}
    
    /**
       Method that sets the policy number

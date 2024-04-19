@@ -27,6 +27,7 @@ public class Project_daxell_wells
       double policyHolderWeight;
       int numOfSmokers = 0, numOfNonSmokers = 0;
       Policy policy;
+      PolicyHolder policyHolder;
       
       while (policyFile.hasNext())
       {
@@ -50,7 +51,8 @@ public class Project_daxell_wells
          policyHolderHeight = policyFile.nextDouble();
          policyFile.nextLine();
          policyHolderWeight = policyFile.nextDouble();
-         policy = new Policy(policyNumber, policyName, policyHolderFirstName, policyHolderLastName, policyHolderAge, smokerStatus, policyHolderHeight, policyHolderWeight);
+         policyHolder = new PolicyHolder(policyHolderFirstName, policyHolderLastName, policyHolderAge, smokerStatus, policyHolderHeight, policyHolderWeight);
+         policy = new Policy(policyNumber, policyName, policyHolder);
          policyList.add(policy);
       }
       
@@ -58,7 +60,7 @@ public class Project_daxell_wells
       {
          displayPolicyInformation(pol);
       }
-      System.out.println();
+      System.out.printf("There were %d Policy objects created.\n\n",Policy.getNumberOfPolicies());
       System.out.printf("The number of policies with a smoker is: %d\n", numOfSmokers);
       System.out.printf("The number of policies with a non-smoker is: %d\n", numOfNonSmokers);
    }
@@ -69,16 +71,9 @@ public class Project_daxell_wells
    */
    public static void displayPolicyInformation(Policy policy)
    {
-      System.out.printf("\n\nPolicy Number: %d\n", policy.getPolicyNumber());
-      System.out.printf("Policy Name: %s\n", policy.getPolicyName());
-      System.out.printf("Policyholder's First Name: %s\n", policy.getPolicyHolderFirstName());
-      System.out.printf("Policyholder's Last Name: %s\n", policy.getPolicyHolderLastName());
-      System.out.printf("Policyholder's Age: %d\n", policy.getPolicyHolderAge());
-      System.out.printf("Policyholder's Smoking Status: %s\n", policy.getSmokerStatus());
-      System.out.printf("Policyholder's Height: %,.1f inches\n", policy.getPolicyHolderHeight());
-      System.out.printf("Policyholder's Weight: %,.1f pounds\n", policy.getPolicyHolderWeight());
+      System.out.print(policy);
       System.out.printf("Policyholder's BMI: %,.2f\n", policy.calculateBMI());
-      System.out.printf("Policy Price: $%,.2f\n", policy.calculatePolicyPrice());
+      System.out.printf("Policy Price: $%,.2f\n\n", policy.calculatePolicyPrice());
    }
 
 }
