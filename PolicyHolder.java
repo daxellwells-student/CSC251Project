@@ -149,4 +149,14 @@ class PolicyHolder
    */
    public double getPolicyHolderWeight()
    {return policyHolderWeight;}
+   
+   public String toString()
+   {
+      return String.format("First Name: " + policyHolderFirstName + 
+             "\nLast Name: " + policyHolderLastName + 
+             "\nPolicy Holder Age: " + policyHolderAge +
+             "\nPolicy Holder's Smoking Status (Y/N): " + smokerStatus +
+             "\nPolicy Holder's Height: " + policyHolderHeight +
+             "\nPolicy Holder's Weight: %.1f\n", policyHolderWeight);
+   }
 }
